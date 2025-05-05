@@ -1,4 +1,4 @@
-package RZ;
+package Vlad;
 
 public class Pachet {
 	int Greutate;
@@ -6,13 +6,19 @@ public class Pachet {
 	int Lungime;
 	int Latime;
 	TipPachet Tip;
+	int ID;
 	
-	Pachet(int gr, int lung, int lat)
+	public int GetID() {
+		return this.ID;
+	}
+	
+	Pachet(int gr, int lung, int lat,int id)
 	{
 		Greutate = gr;
 		Lungime = lung;
 		Latime = lat;
 		Stare = StarePachet.Valid;
+		this.ID = id;
 	}
 	
 	public int GetGreutate()
@@ -30,6 +36,11 @@ public class Pachet {
 		return this.Tip;
 	}
 	
+	public void SetTip(TipPachet t)
+	{
+		this.Tip=t;
+	}
+	
 	public void SetStare(StarePachet s)
 	{
 		Stare = s;
@@ -40,9 +51,11 @@ public class Pachet {
 		return Lungime * Latime * Latime;
 	}
 	
-	public void Afisare_Pachet()
+	public void afisare()
 	{
 		System.out.println("Detalii Pachet:");
+		System.out.print("ID: ");
+		System.out.println(ID);
 		System.out.print("Greutate: ");
 		System.out.println(Greutate);
 		System.out.print("Latime: ");
@@ -53,5 +66,6 @@ public class Pachet {
 		System.out.println(Stare);
 		System.out.print("Tip: ");
 		System.out.println(Tip);
+		
 	}
 }

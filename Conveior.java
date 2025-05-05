@@ -1,6 +1,7 @@
 package Vlad;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Conveior extends Robot {
 	private int Lungime;
@@ -34,11 +35,11 @@ public class Conveior extends Robot {
 	}
 	
 	public void Adauga_pachet(Pachet pachet) {
-		
+		this.Pachete_actuale.add(pachet);
 	}
 	
 	public void Elimina_pachet(Pachet pachet) {
-		
+		//self-explanatory, foloseste GetID
 	}
 	
 }

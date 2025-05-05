@@ -25,6 +25,6 @@ public class RobotMobil extends Robot{
 	}
 	
 	public void RetragereProdusDefect(Pachet p) {
-		
+		// elimina rebutul p, il duce la mormanul de rebuturi
 	}
 }

@@ -1,4 +1,6 @@
+package Vlad;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Supervizor {
 
@@ -33,10 +35,13 @@ public class Supervizor {
         System.out.println(this.nume + " " + this.prenume + " varsta: " + this.varsta + " CNP: " + this.CNP + " salariu: " + this.Salariu + " data angajarii: " + this.dataAngajarii + "\n");
     }
 
-    //public void interventie(TipAlarma alarma){}
+    public void interventie(Robot r){
+    	r.SetStare(StareRobot.In_mentenanta);
+    }
+    
 
-    public void revalidareSistem(){
-        System.out.println("we ballin");
+    public void revalidareSistem(ArrayList<Robot> vr){
+        //pune robotii pe Inactiv deocamdata
     }
 
     //getteri/setteri

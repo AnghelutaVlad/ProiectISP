@@ -1,4 +1,4 @@
-package RZ;
+package Vlad;
 
 public enum StareRobot {
 	Activ,

@@ -33,7 +33,11 @@ public class Robot {
 	public StareRobot GetStare() {
 		return Stare;
 	}
-	public void DeplasareObiecte(Pachet p) {
-		
+	public void DeplasareObiecte() {
+		this.Stare = StareRobot.Activ;
 	}
+	public int GetCapacitate() {
+		return Capacitate;
+	}
+	
 }
