@@ -1,4 +1,4 @@
-package Vlad;
+package Ambalare;
 
 public class Pachet {
 	int Greutate;

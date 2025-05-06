@@ -1,5 +1,6 @@
-package Vlad;
+package Ambalare;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class SistemMonitorizare {
     //parametri
@@ -27,20 +28,76 @@ public class SistemMonitorizare {
         System.out.println("Nr camere : " + this.nrCamere + " tip camere: " + this.tipCamere + " data achizitie: " + this.dataAchizitie /* + " alarma: " + this.alarma*/ + "\n");
     }
 
-    //public Robot DiagnosticRobot(Robot r){}
+    public StareRobot DiagnosticRobot(Robot r){
+    	if(r.GetStare()==StareRobot.Defect) {
+    		switch(r.getClass().getName()) {
+    		     case "Ambalare.BratRobotic":
+    		    	 this.SetAlarma(TipAlarma.Brat_defect);
+    		    	 break;
+    		     case "Ambalare.RobotMobil":
+    		    	 this.SetAlarma(TipAlarma.Robot_mobil_defect);
+    		    	 break;
+    		     case "Ambalare.Conveior":
+    		    	 this.SetAlarma(TipAlarma.Conveior_defect);
+    		    	 break;
+    		}
+    		
+    	}
+    	return r.GetStare();
+    }
     // verifica starea robotului si seteaza alarme
     
     
-    //public Robot TrimisComanda(Robot r, Pachet p){}
+    public void TrimisComanda(BratRobotic r, Pachet p){
+    	r.DeplasareObiecte();
+    	r.AmbalarePachet(p);
+    	r.SetStare(StareRobot.Inactiv);
+    }
+    
+    public void TrimisComanda(BratRobotic r, Pachet p, Conveior c_out, Conveior c_in){
+    	r.DeplasareObiecte();
+    	r.SortareObiect(p, c_out, c_in);
+    	r.SetStare(StareRobot.Inactiv);
+    }
+    public void TrimisComanda(BratRobotic r, Pachet p, RobotMobil m, ArrayList<Pachet> vr){
+    	r.DeplasareObiecte();
+    	r.EliminaRebut(p, m, vr);
+    	r.SetStare(StareRobot.Inactiv);
+    }
+    
+    public void TrimisComanda(Conveior c) {
+    	if(c.GetNrPachete() > 0) {
+    		c.DeplasareObiecte();
+    	}
+    	else c.SetStare(StareRobot.Inactiv);
+    }
+    
+    
+    
     // switch case de implementat + verifica daca greutatea pachetului depaseste capacitatea sau nu
     
     
-    //public TipPachet IdentificareCategorie(TipPachet p){}
+    public TipPachet IdentificareCategorie(Pachet p){
+    	if(p.Volum() <= Constante.VolumPrag) {
+    		return TipPachet.Mic;
+    	}
+    	else return TipPachet.Mare;
+    }
     // verifica dimensiuni => Stare mic/mare
     
     
-    //public StarePachet DiagnosticPachet(TipPachet p){}
-    // verifica Valid/Rebut la pachet
+    public StarePachet DiagnosticPachet(Pachet p){
+    	if(p.Volum() < Constante.VolumMin || p.Volum() > Constante.VolumMax || p.GetGreutate() < Constante.Greutate_Min ||  p.GetGreutate() > Constante.Greutate_Max) {
+    		p.SetStare(StarePachet.Rebut);
+    		return p.GetStare();
+    	}
+    	else {
+    		p.SetTip(this.IdentificareCategorie(p));
+    		p.SetStare(StarePachet.Valid);
+    		return p.GetStare();
+    	}
+    	
+    }
 
     
     //getteri/setteri

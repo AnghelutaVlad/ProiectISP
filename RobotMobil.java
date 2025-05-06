@@ -1,6 +1,7 @@
-package Vlad;
+package Ambalare;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class RobotMobil extends Robot{
 	private int Lungime;
@@ -23,8 +24,10 @@ public class RobotMobil extends Robot{
 		System.out.println("Inaltime: "+this.Inaltime);
 		System.out.println("Viteza: "+this.Viteza);
 	}
-	
-	public void RetragereProdusDefect(Pachet p) {
-		// elimina rebutul p, il duce la mormanul de rebuturi
+	public void DepozitarePachet(Pachet p, ArrayList<Pachet> vp) {
+		vp.add(p);
+	}
+	public void RetragereProdusDefect(Pachet p, ArrayList<Pachet> vr) {
+		vr.add(p);
 	}
 }

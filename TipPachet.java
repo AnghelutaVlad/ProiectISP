@@ -1,4 +1,4 @@
-package Vlad;
+package Ambalare;
 
 public enum TipPachet {
 	Mic,

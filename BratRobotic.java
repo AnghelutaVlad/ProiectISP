@@ -1,4 +1,4 @@
-package Vlad;
+package Ambalare;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -45,10 +45,13 @@ public class BratRobotic extends Robot {
 	
 	public void SortareObiect(Pachet p, Conveior c_out, Conveior c_in) {
 		//eliminare obiect p de pe conveior c si asignare pe conveior corespunzator (A/B)
+		c_out.Elimina_pachet(p.GetID());
+		c_in.Adauga_pachet(p);
 	}
 	
-	public void EliminaRebut(Pachet p, RobotMobil m) {
+	public void EliminaRebut(Pachet p, RobotMobil m, ArrayList<Pachet> vr) {
 		//elimina rebutul p, pune pe robotul mobil m
+		m.RetragereProdusDefect(p,vr);
 	}
 	
 }

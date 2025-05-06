@@ -1,4 +1,4 @@
-package Vlad;
+package Ambalare;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,10 +36,14 @@ public class Conveior extends Robot {
 	
 	public void Adauga_pachet(Pachet pachet) {
 		this.Pachete_actuale.add(pachet);
+		this.Nr_pachete++;
 	}
 	
-	public void Elimina_pachet(Pachet pachet) {
-		//self-explanatory, foloseste GetID
+	public void Elimina_pachet(int id) {
+		Pachete_actuale.removeIf(pachet -> pachet.GetID()==id);
+		this.Nr_pachete--;
 	}
-	
+	public int GetNrPachete() {
+		return this.Nr_pachete;
+	}
 }

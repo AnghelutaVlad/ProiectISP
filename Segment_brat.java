@@ -1,4 +1,4 @@
-package Vlad;
+package Ambalare;
 
 public class Segment_brat {
 	private int Lungime;
