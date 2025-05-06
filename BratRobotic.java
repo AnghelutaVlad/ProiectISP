@@ -51,7 +51,7 @@ public class BratRobotic extends Robot {
 	
 	public void EliminaRebut(Pachet p, RobotMobil m, ArrayList<Pachet> vr) {
 		//elimina rebutul p, pune pe robotul mobil m
-		m.RetragereProdusDefect(p,vr);
+		m.DeplasarePachet(p,vr);
 	}
 	
 }
