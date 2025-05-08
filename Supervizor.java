@@ -41,7 +41,9 @@ public class Supervizor {
     
 
     public void revalidareSistem(ArrayList<Robot> vr){
-        //pune robotii pe Inactiv deocamdata
+        for(int i =0; i < vr.size(); i++) {
+        	vr.get(i).SetStare(StareRobot.Inactiv);
+        }
     }
 
     //getteri/setteri

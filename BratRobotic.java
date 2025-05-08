@@ -53,5 +53,10 @@ public class BratRobotic extends Robot {
 		//elimina rebutul p, pune pe robotul mobil m
 		m.DeplasarePachet(p,vr);
 	}
+	public void PlasarePachet(Conveior c,ArrayList<Pachet> vp) {
+		for(int i = 0;i<vp.size();i++) {
+		Pachet p = vp.get(i);
+		c.Adauga_pachet(p);}
+	}
 	
 }

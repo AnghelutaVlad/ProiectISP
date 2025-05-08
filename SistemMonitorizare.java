@@ -10,14 +10,14 @@ public class SistemMonitorizare {
     private LocalDate dataAchizitie;
 
     //constructori
-    SistemMonitorizare(){
+    public SistemMonitorizare(){
         this.alarma = TipAlarma.Functionare_normala;
         this.nrCamere = 0;
         this.tipCamere = "-";
         this.dataAchizitie = LocalDate.now();
     }
 
-    SistemMonitorizare(int nrCamere, String tipCamere, LocalDate dataAchizitie, TipAlarma alarma){
+    public SistemMonitorizare(int nrCamere, String tipCamere, LocalDate dataAchizitie, TipAlarma alarma){
         this.nrCamere = nrCamere;
         this.tipCamere = tipCamere;
         this.dataAchizitie = dataAchizitie;
@@ -65,6 +65,12 @@ public class SistemMonitorizare {
     	r.SetStare(StareRobot.Inactiv);
     }
     
+    public void TrimisComanda(BratRobotic r, Conveior c, ArrayList<Pachet> vp) {
+    	r.DeplasareObiecte();
+    	r.PlasarePachet(c, vp);
+    	r.SetStare(StareRobot.Inactiv);
+    }
+    
     public void TrimisComanda(Conveior c) {
     	if(c.GetNrPachete() > 0) {
     		c.DeplasareObiecte();
@@ -72,7 +78,11 @@ public class SistemMonitorizare {
     	else c.SetStare(StareRobot.Inactiv);
     }
     
-    
+    public void TrimisComanda(RobotMobil r, Pachet p, ArrayList<Pachet> dep) {
+    	r.DeplasareObiecte();
+    	r.DeplasarePachet(p, dep);
+    	r.SetStare(StareRobot.Inactiv);
+    }
     
     // switch case de implementat + verifica daca greutatea pachetului depaseste capacitatea sau nu
     

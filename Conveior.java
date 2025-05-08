@@ -46,4 +46,13 @@ public class Conveior extends Robot {
 	public int GetNrPachete() {
 		return this.Nr_pachete;
 	}
+	public Pachet GetPachet(int id){
+		for(int i = 0; i < Pachete_actuale.size();i++) {
+			if(Pachete_actuale.get(i).GetID()==id) {
+				return Pachete_actuale.get(i);
+			}
+		}
+		Pachet p = new Pachet();
+		return p;
+	}
 }

@@ -12,7 +12,7 @@ public class Pachet {
 		return this.ID;
 	}
 	
-	Pachet(int gr, int lung, int lat,int id)
+	public Pachet(int gr, int lung, int lat,int id)
 	{
 		Greutate = gr;
 		Lungime = lung;
@@ -20,7 +20,7 @@ public class Pachet {
 		Stare = StarePachet.Valid;
 		this.ID = id;
 	}
-	
+	public Pachet() {}
 	public int GetGreutate()
 	{
 		return this.Greutate;

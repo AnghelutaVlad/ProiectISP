@@ -24,10 +24,8 @@ public class RobotMobil extends Robot{
 		System.out.println("Inaltime: "+this.Inaltime);
 		System.out.println("Viteza: "+this.Viteza);
 	}
-	public void DepozitarePachet(Pachet p, ArrayList<Pachet> vp) {
+	public void DeplasarePachet(Pachet p, ArrayList<Pachet> vp) {
 		vp.add(p);
 	}
-	public void RetragereProdusDefect(Pachet p, ArrayList<Pachet> vr) {
-		vr.add(p);
-	}
+	
 }
