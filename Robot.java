@@ -39,5 +39,8 @@ public class Robot {
 	public int GetCapacitate() {
 		return Capacitate;
 	}
+	public int GetID() {
+		return this.ID;
+	}
 	
 }

@@ -28,7 +28,7 @@ public class SistemMonitorizare {
         System.out.println("Nr camere : " + this.nrCamere + " tip camere: " + this.tipCamere + " data achizitie: " + this.dataAchizitie /* + " alarma: " + this.alarma*/ + "\n");
     }
 
-    public StareRobot DiagnosticRobot(Robot r){
+    public int DiagnosticRobot(Robot r){
     	if(r.GetStare()==StareRobot.Defect) {
     		switch(r.getClass().getName()) {
     		     case "Ambalare.BratRobotic":
@@ -40,10 +40,12 @@ public class SistemMonitorizare {
     		     case "Ambalare.Conveior":
     		    	 this.SetAlarma(TipAlarma.Conveior_defect);
     		    	 break;
+    		     
     		}
-    		
+    		return r.GetID();
     	}
-    	return r.GetStare();
+    	else return -1;
+    	
     }
     // verifica starea robotului si seteaza alarme
     
