@@ -1,5 +1,10 @@
 package Ambalare;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Pachet {
 	int Greutate;
 	StarePachet Stare;
@@ -20,7 +25,16 @@ public class Pachet {
 		Stare = StarePachet.Valid;
 		this.ID = id;
 	}
-	public Pachet() {}
+	
+	public Pachet()
+	{
+		Greutate = 0;
+		Lungime = 0;
+		Latime = 0;
+		Stare = StarePachet.Rebut;
+		this.ID = 0;
+	}
+	
 	public int GetGreutate()
 	{
 		return this.Greutate;
@@ -68,4 +82,26 @@ public class Pachet {
 		System.out.println(Tip);
 		
 	}
+	
+	public void salvare(String numeFisier, File logFile) {
+
+    	PrintWriter filePrint;
+
+    	
+    	FileWriter testWriter;
+    	try {
+    		testWriter = new FileWriter(logFile, true);
+    		filePrint = new PrintWriter(testWriter, true);
+    		filePrint.println("Pachet: ");
+    		filePrint.println("      ID: " + this.ID);
+    		filePrint.println("      Greutate: " + this.Greutate);
+    		filePrint.println("      Latime: " + this.Latime);
+    		filePrint.println("      Lungime: " + this.Lungime);
+    		filePrint.println("      Stare: " + this.Stare);
+    		filePrint.println("      Tip: " + this.Tip);
+    		
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    }
 }

@@ -18,6 +18,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import java.util.concurrent.CountDownLatch;
+
+
 public class GUI extends JFrame implements ActionListener {
 
 	JButton button_mic, button_mare, button_rebut, button_raport;
@@ -147,6 +150,8 @@ public class GUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button_mic) {
+
+			Fereastra_pachete_mici fereastra = new Fereastra_pachete_mici();
 			Random rand = new Random();
 			int pos_in = 0;
 			Pachet p = new Pachet(rand.nextInt(Constante.Greutate_Max - Constante.Greutate_Min + 1) + Constante.Greutate_Min, rand.nextInt(1)+2, rand.nextInt(3)+3, IDpac);
@@ -170,17 +175,10 @@ public class GUI extends JFrame implements ActionListener {
 			if(sis_mon.GetAlarma() != TipAlarma.Functionare_normala)
 				interventie_supervizor();
 			JOptionPane.showMessageDialog(null, "Pachetul a fost pus pe primul conveior" , "Pachet", JOptionPane.PLAIN_MESSAGE);	
-			int wait = 0;
-			while (wait < 100)
-			{   try {
-				Thread.sleep(10);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-				wait++;
-			}
 
+			fereastra.fill_primul_conveior();
+
+			
 			if(p.GetStare() == StarePachet.Valid)
 			switch(p.GetTip()) {
 			case TipPachet.Mic:
@@ -198,16 +196,7 @@ public class GUI extends JFrame implements ActionListener {
 				if(sis_mon.GetAlarma() != TipAlarma.Functionare_normala)
 					interventie_supervizor();
 				JOptionPane.showMessageDialog(null, "Pachetul a fost sortat pe conveiorul corespunzator" , "Pachet", JOptionPane.PLAIN_MESSAGE);	
-				wait = 0;
-				while (wait < 100)
-				{   try {
-					Thread.sleep(10);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-					wait++;
-				}
+				fereastra.fill_al_doilea_conveior();
 				
 				for(int i = 0; i < robotimobili.size(); i++)
 					if(robotimobili.get(i).GetStare() == StareRobot.Inactiv) {
@@ -219,16 +208,7 @@ public class GUI extends JFrame implements ActionListener {
 				if(sis_mon.GetAlarma() != TipAlarma.Functionare_normala)
 					interventie_supervizor();
 				JOptionPane.showMessageDialog(null, "Pachetul a fost preluat de un robot mobil" , "Pachet", JOptionPane.PLAIN_MESSAGE);	
-				wait = 0;
-				while (wait < 100)
-				{   try {
-					Thread.sleep(10);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-					wait++;
-				}
+				fereastra.fill_actiune_robot_mobil();
 				
 				JOptionPane.showMessageDialog(null, "Pachetul a ajuns in depozit" , "Pachet", JOptionPane.PLAIN_MESSAGE);	
 				break;
@@ -241,6 +221,7 @@ public class GUI extends JFrame implements ActionListener {
 				System.out.print("Pachetul nu era valid");
 		}
 		if (e.getSource() == button_mare) {
+			Fereastra_pachete_mari fereastra = new Fereastra_pachete_mari();
 			Random rand = new Random();
 			int pos_in = 0;
 			Pachet p = new Pachet(rand.nextInt(Constante.Greutate_Max - Constante.Greutate_Min + 1) + Constante.Greutate_Min, rand.nextInt(1)+2, rand.nextInt(1)+6, IDpac);
@@ -264,16 +245,9 @@ public class GUI extends JFrame implements ActionListener {
 			if(sis_mon.GetAlarma() != TipAlarma.Functionare_normala)
 				interventie_supervizor();
 			JOptionPane.showMessageDialog(null, "Pachetul a fost pus pe primul conveior" , "Pachet", JOptionPane.PLAIN_MESSAGE);	
-			int wait = 0;
-			while (wait < 100)
-			{   try {
-				Thread.sleep(10);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-				wait++;
-			}
+			
+			fereastra.fill_primul_conveior();
+			
 			if (p.GetStare() == StarePachet.Valid)
 			switch(p.GetTip()) {
 			case TipPachet.Mare:
@@ -291,16 +265,8 @@ public class GUI extends JFrame implements ActionListener {
 				if(sis_mon.GetAlarma() != TipAlarma.Functionare_normala)
 					interventie_supervizor();
 				JOptionPane.showMessageDialog(null, "Pachetul a fost sortat pe conveiorul corespunzator" , "Pachet", JOptionPane.PLAIN_MESSAGE);	
-				wait = 0;
-				while (wait < 100)
-				{   try {
-					Thread.sleep(10);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-					wait++;
-				}
+
+				fereastra.fill_al_doilea_conveior();
 				
 				for(int i = 0; i < robotimobili.size(); i++)
 					if(robotimobili.get(i).GetStare() == StareRobot.Inactiv) {
@@ -312,16 +278,8 @@ public class GUI extends JFrame implements ActionListener {
 				if(sis_mon.GetAlarma() != TipAlarma.Functionare_normala)
 					interventie_supervizor();
 				JOptionPane.showMessageDialog(null, "Pachetul a fost preluat de un robot mobil" , "Pachet", JOptionPane.PLAIN_MESSAGE);	
-				wait = 0;
-				while (wait < 100)
-				{   try {
-					Thread.sleep(10);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-					wait++;
-				}
+
+				fereastra.fill_actiune_robot_mobil();
 				
 				JOptionPane.showMessageDialog(null, "Pachetul a ajuns in depozit" , "Pachet", JOptionPane.PLAIN_MESSAGE);	
 				break;
@@ -335,6 +293,7 @@ public class GUI extends JFrame implements ActionListener {
 			
 		}
 		if (e.getSource() == button_rebut) {
+			Fereastra_rebuturi fereastra = new Fereastra_rebuturi();
 			Random rand = new Random();
 			int pos_in = 0;
 			Pachet p = new Pachet(rand.nextInt(Constante.Greutate_Max - Constante.Greutate_Min + 1) + Constante.Greutate_Min, rand.nextInt(3)+3, rand.nextInt(3)+6, IDpac);
@@ -344,7 +303,7 @@ public class GUI extends JFrame implements ActionListener {
 			p.afisare();
 			ArrayList<Pachet> vp = new ArrayList<Pachet>();
 			vp.add(p);
-			
+
 			for(int i = 0; i < conveioare.size(); i++)
 				if(conveioare.get(i).GetID() == ID_conv_intrare)
 					{ pos_in = i;
@@ -358,16 +317,8 @@ public class GUI extends JFrame implements ActionListener {
 			if(sis_mon.GetAlarma() != TipAlarma.Functionare_normala)
 				interventie_supervizor();
 			JOptionPane.showMessageDialog(null, "Rebutul a fost pus pe primul conveior" , "Rebut", JOptionPane.PLAIN_MESSAGE);	
-			int wait = 0;
-			while (wait < 100)
-			{   try {
-				Thread.sleep(10);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-				wait++;
-			}
+
+			fereastra.fill_primul_conveior();
 			
 			if(p.GetStare() == StarePachet.Rebut)	
 				{for(int i = 0; i < robotimobili.size(); i++)
@@ -380,25 +331,17 @@ public class GUI extends JFrame implements ActionListener {
 				if(sis_mon.GetAlarma() != TipAlarma.Functionare_normala)
 					interventie_supervizor();
 				JOptionPane.showMessageDialog(null, "Rebutul a fost preluat de un robot mobil" , "Rebut", JOptionPane.PLAIN_MESSAGE);	
-				wait = 0;
-				while (wait < 100)
-				{   try {
-					Thread.sleep(10);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-					wait++;
-				}
 				
-				
+				fereastra.fill_actiune_robot_mobil();
+
 				JOptionPane.showMessageDialog(null, "Rebutul a ajuns in zona de decartare" , "Rebut", JOptionPane.PLAIN_MESSAGE);	
-				
 				}
 				
 			else
 				System.out.print("Pachetul nu era rebut");
+				
 			}
+		
 		
 		if (e.getSource() == button_raport) {
 			
@@ -429,6 +372,7 @@ public class GUI extends JFrame implements ActionListener {
 				pac_mici_dep.get(i).salvare(Fisier_raport, logFile);
 			for(int i = 0; i < reb_dep.size(); i++)
 				reb_dep.get(i).salvare(Fisier_raport, logFile);
+			JOptionPane.showMessageDialog(null, "Registrul a fost salvat" , "Registru", JOptionPane.INFORMATION_MESSAGE);
 		}
 		}
 		

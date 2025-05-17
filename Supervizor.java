@@ -1,4 +1,8 @@
 package Ambalare;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -34,17 +38,37 @@ public class Supervizor {
     public void afisare(){
         System.out.println(this.nume + " " + this.prenume + " varsta: " + this.varsta + " CNP: " + this.CNP + " salariu: " + this.Salariu + " data angajarii: " + this.dataAngajarii + "\n");
     }
+    
+    public void salvare(String numeFisier, File logFile) {
+    	PrintWriter filePrint;
+
+    	
+    	FileWriter testWriter;
+    	try {
+    		testWriter = new FileWriter(logFile, true);
+    		filePrint = new PrintWriter(testWriter, true);
+    		filePrint.println("Supervizor: ");
+    		filePrint.println("      Nume: " + this.nume);
+    		filePrint.println("      Prenume: " + this.prenume);
+    		filePrint.println("      Varsta: " + this.varsta);
+    		filePrint.println("      CNP: " + this.CNP);
+    		filePrint.println("      Salariu: " + this.Salariu);
+    		filePrint.println("      Data angajarii: " + this.dataAngajarii);
+    		
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    }
 
     public void interventie(Robot r){
     	r.SetStare(StareRobot.In_mentenanta);
     }
     
 
-    public void revalidareSistem(ArrayList<Robot> vr, SistemMonitorizare sistem){
-        for(int i =0; i < vr.size(); i++) {
-        	vr.get(i).SetStare(StareRobot.Inactiv);
-        }
-        sistem.SetAlarma(TipAlarma.Functionare_normala);
+    public <T extends Robot> void revalidareSistem(ArrayList<T> vr){
+        //pune robotii pe Inactiv deocamdata
+    	for(int i = 0; i < vr.size(); i++)
+    		vr.get(i).SetStare(StareRobot.Inactiv);
     }
 
     //getteri/setteri
