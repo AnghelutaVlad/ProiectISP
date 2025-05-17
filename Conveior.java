@@ -1,5 +1,9 @@
 package Ambalare;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -34,25 +38,53 @@ public class Conveior extends Robot {
 		}
 	}
 	
+	public void salvare(String numeFisier, File logFile) {
+
+    	PrintWriter filePrint;
+    	
+    	FileWriter testWriter;
+    	try {
+    		testWriter = new FileWriter(logFile, true);
+    		filePrint = new PrintWriter(testWriter, true);
+    		filePrint.println("Conveior: ");
+    		super.salvare(numeFisier, logFile);
+    		filePrint.println("      Lungime: " + this.Lungime);
+    		filePrint.println("      Latime: " + this.Latime);
+    		filePrint.println("      Grosime: " + this.Grosime);
+    		filePrint.println("      Viteza: " + this.Viteza);
+    		filePrint.println("      Numar pachete: " + this.Nr_pachete);
+    		for(int i=0;i<Pachete_actuale.size();i++) {
+    			filePrint.println("      Pachet "+(i+1));
+    			Pachete_actuale.get(i).salvare(numeFisier, logFile);
+    		}
+    		
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    }
+	
 	public void Adauga_pachet(Pachet pachet) {
 		this.Pachete_actuale.add(pachet);
 		this.Nr_pachete++;
 	}
 	
 	public void Elimina_pachet(int id) {
-		Pachete_actuale.removeIf(pachet -> pachet.GetID()==id);
+		Pachete_actuale.removeIf(pachet-> pachet.GetID() == id);
 		this.Nr_pachete--;
 	}
-	public int GetNrPachete() {
+	
+	public int GetNrPachete()
+	{
 		return this.Nr_pachete;
 	}
-	public Pachet GetPachet(int id){
-		for(int i = 0; i < Pachete_actuale.size();i++) {
-			if(Pachete_actuale.get(i).GetID()==id) {
+	
+	public Pachet GetPachet(int id) {
+		for(int i = 0; i < this.Nr_pachete; i++)
+			if(Pachete_actuale.get(i).GetID() == id)
 				return Pachete_actuale.get(i);
-			}
-		}
+		
 		Pachet p = new Pachet();
 		return p;
 	}
+	
 }

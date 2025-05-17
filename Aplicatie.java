@@ -62,7 +62,6 @@ public class Aplicatie {
 		
 		String Fisier_raport = "Raport_";
 		
-		
 		GUI g = new GUI(lista_robotimobili, lista_braterobotice, lista_conveioare, sistem_monitorizare, pachete_mici_depozitate, pachete_mari_depozitate, rebuturi_depozitate, c_intrare.GetID(), c_mari.GetID(), c_mici.GetID(), Fisier_raport, angajat);
 	}
 }

@@ -1,5 +1,9 @@
 package Ambalare;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -24,8 +28,30 @@ public class RobotMobil extends Robot{
 		System.out.println("Inaltime: "+this.Inaltime);
 		System.out.println("Viteza: "+this.Viteza);
 	}
+	
+	public void salvare(String numeFisier, File logFile) {
+
+    	PrintWriter filePrint;
+
+    	
+    	FileWriter testWriter;
+    	try {
+    		testWriter = new FileWriter(logFile, true);
+    		filePrint = new PrintWriter(testWriter, true);
+    		filePrint.println("Robot mobil: ");
+    		super.salvare(numeFisier, logFile);
+    		filePrint.println("      Lungime: " + this.Lungime);
+    		filePrint.println("      Latime: " + this.Latime);
+    		filePrint.println("      Inaltime: " + this.Inaltime);
+    		filePrint.println("      Viteza: " + this.Viteza);
+    		
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    }
+	
 	public void DeplasarePachet(Pachet p, ArrayList<Pachet> vp) {
 		vp.add(p);
 	}
-	
+
 }

@@ -1,5 +1,9 @@
 package Ambalare;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -30,6 +34,31 @@ public class BratRobotic extends Robot {
 		
 	}
 	
+	public void salvare(String numeFisier, File logFile) {
+
+    	PrintWriter filePrint;    	
+    	FileWriter testWriter;
+    	try {
+    		testWriter = new FileWriter(logFile, true);
+    		filePrint = new PrintWriter(testWriter, true);
+    		filePrint.println("Brat robotic: ");
+    		super.salvare(numeFisier, logFile);
+    		filePrint.println("      Nr segmente: " + this.Nr_segmente);
+    		filePrint.println("      Unghiuri: ");
+    		for(int i = 0;i < Unghiuri_segmente.size();i++) {
+    			filePrint.println("         Unghi "+(i+1)+": "+Unghiuri_segmente.get(i));
+    		}
+    		filePrint.println("      Segmente: ");
+    		for(int i = 0; i < Segmente.size();i++) {
+    			filePrint.println("         Segment "+(i+1));
+    			Segmente.get(i).salvare(numeFisier, logFile);
+    		}
+    		
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    }
+	
 	public int GetRazaActiune() {
 		int raza = 0;
 		for(int i = 0; i < Segmente.size();i++) {
@@ -41,22 +70,19 @@ public class BratRobotic extends Robot {
 		p.SetStare(StarePachet.Ambalat);
 	}
 	
-	
-	
 	public void SortareObiect(Pachet p, Conveior c_out, Conveior c_in) {
-		//eliminare obiect p de pe conveior c si asignare pe conveior corespunzator (A/B)
 		c_out.Elimina_pachet(p.GetID());
 		c_in.Adauga_pachet(p);
 	}
 	
 	public void EliminaRebut(Pachet p, RobotMobil m, ArrayList<Pachet> vr) {
-		//elimina rebutul p, pune pe robotul mobil m
 		m.DeplasarePachet(p,vr);
 	}
-	public void PlasarePachet(Conveior c,ArrayList<Pachet> vp) {
-		for(int i = 0;i<vp.size();i++) {
-		Pachet p = vp.get(i);
-		c.Adauga_pachet(p);}
+	
+	public void PlasarePachet(Conveior c, ArrayList<Pachet> vp)
+	{
+		for (int i = 0; i < vp.size(); i++)
+			c.Adauga_pachet(vp.get(i));
 	}
 	
 }
